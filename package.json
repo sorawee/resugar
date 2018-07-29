@@ -1,0 +1,30 @@
+{
+    "name": "pyret-resugar",
+    "version": "0.1.0",
+    "scripts": {
+        "build": "npm run peg && bsb -make-world && npm run webpack",
+        "start": "bsb -make-world -w",
+        "clean": "bsb -clean-world",
+        "test": "jest",
+        "webpack": "webpack -p",
+        "peg:compile": "(echo \"{\"; cat ./src/Abbrev.re; echo \"}\"; cat ./grammar.pegjs) > ./dist/grammar.pegjs",
+        "peg:core": "pegjs --extra-options-file ./pegSettings.json -o ./lib/PegParser.js ./dist/grammar.pegjs",
+        "peg": "npm run peg:compile && npm run peg:core"
+    },
+    "keywords": [
+        "BuckleScript"
+    ],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "@glennsl/bs-jest": "^0.4.2",
+        "bs-platform": "^4.0.0",
+        "webpack": "^4.16.2",
+        "webpack-cli": "^3.1.0"
+    },
+    "dependencies": {
+        "@glennsl/bs-json": "^2.0.0",
+        "bs-zarith": "^1.0.0",
+        "pegjs": "^0.10.0"
+    }
+}
